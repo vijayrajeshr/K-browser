@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kumari Browser</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Browser Container -->
+  <div class="browser-container">
+    <!-- Header with Navigation -->
+    <header class="browser-header">
+      <div class="nav-controls">
+        <button class="nav-btn" id="backBtn" title="Back" disabled>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="nav-btn" id="forwardBtn" title="Forward" disabled>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+        <button class="nav-btn" id="reloadBtn" title="Reload">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="address-bar-container">
+        <input type="text" id="addressBar" class="address-bar" placeholder="Enter URL or search...">
+      </div>
+      
+      <button class="btn-reading-mode" id="readingModeBtn" title="Enter Reading Mode">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+        <span>Reading Mode</span>
+      </button>
+    </header>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar" id="tabBar">
+      <!-- Tabs will be dynamically added here -->
+    </div>
+
+    <!-- Welcome Screen -->
+    <div class="viewport" id="viewport">
+      <div class="welcome-screen">
+        <div class="welcome-content">
+          <h1>🌐 Kumari Browser</h1>
+          <p>Type a URL or search query in the address bar above</p>
+          <div class="quick-links">
+            <button class="quick-link" data-url="https://www.google.com">Google</button>
+            <button class="quick-link" data-url="https://github.com">GitHub</button>
+            <button class="quick-link" data-url="https://www.wikipedia.org">Wikipedia</button>
+            <button class="quick-link" data-url="https://stackoverflow.com">Stack Overflow</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reading Mode Panel -->
+    <div class="reading-mode-panel" id="readingModePanel">
+      <div class="reading-controls">
+        <button class="reading-control-btn" id="exitReadingBtn" title="Exit Reading Mode">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+          <span>Exit</span>
+        </button>
+        
+        <div class="reading-control-group">
+          <span class="control-label">Text Size:</span>
+          <button class="text-size-btn" data-size="14">A-</button>
+          <button class="text-size-btn active" data-size="18">A</button>
+          <button class="text-size-btn" data-size="24">A+</button>
+          <button class="text-size-btn" data-size="32">A++</button>
+        </div>
+        
+        <div class="reading-control-group">
+          <span class="control-label">Theme:</span>
+          <button class="theme-toggle-btn" id="themeToggleBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+        </div>
+        
+        <div class="reading-control-group">
+          <span class="control-label">Line Spacing:</span>
+          <button class="spacing-btn active" data-spacing="1">1x</button>
+          <button class="spacing-btn" data-spacing="1.5">1.5x</button>
+          <button class="spacing-btn" data-spacing="2">2x</button>
+        </div>
+      </div>
+      
+      <div class="reading-content" id="readingContent">
+        <div class="article-container">
+          <h1 class="article-title" id="articleTitle"></h1>
+          <div class="article-meta" id="articleMeta"></div>
+          <div class="article-body" id="articleBody"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div class="loading-indicator" id="loadingIndicator">
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
