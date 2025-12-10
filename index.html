@@ -51,15 +51,39 @@
 
     <!-- Welcome Screen -->
     <div class="viewport" id="viewport">
-      <div class="welcome-screen">
+      <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-content">
           <h1>🌐 Kumari Browser</h1>
           <p>Type a URL or search query in the address bar above</p>
           <div class="quick-links">
-            <button class="quick-link" data-url="https://www.google.com">Google</button>
-            <button class="quick-link" data-url="https://github.com">GitHub</button>
+            <button class="quick-link" data-url="https://example.com">Example.com</button>
+            <button class="quick-link" data-url="https://httpbin.org/html">HTTPBin</button>
             <button class="quick-link" data-url="https://www.wikipedia.org">Wikipedia</button>
-            <button class="quick-link" data-url="https://stackoverflow.com">Stack Overflow</button>
+            <button class="quick-link" data-url="https://developer.mozilla.org">MDN Web Docs</button>
+          </div>
+          <p style="margin-top: 20px; font-size: 12px; opacity: 0.6;">
+            Note: Many websites (like Google, GitHub) block iframe embedding for security. 
+            Use "Open in New Window" if a site doesn't load.
+          </p>
+        </div>
+      </div>
+      <!-- Iframe container for web content -->
+      <div class="iframe-container" id="iframeContainer" style="display: none;">
+        <iframe id="webView" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation"></iframe>
+      </div>
+      <!-- Error message container -->
+      <div class="error-message" id="errorMessage" style="display: none;">
+        <div class="error-content">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <h2>Unable to Load Page</h2>
+          <p id="errorText">This website blocks embedding in iframes for security reasons.</p>
+          <div class="error-actions">
+            <button class="btn btn--primary" id="openInNewWindowBtn">Open in New Window</button>
+            <button class="btn btn--outline" id="retryBtn">Retry</button>
           </div>
         </div>
       </div>

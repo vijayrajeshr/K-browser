@@ -987,6 +987,95 @@ body {
   justify-content: center;
 }
 
+.iframe-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--browser-dark-bg);
+}
+
+.iframe-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: white;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  color: var(--browser-text-primary);
+  width: 100%;
+  height: 100%;
+}
+
+.error-content {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.error-content svg {
+  color: var(--browser-text-secondary);
+  opacity: 0.6;
+}
+
+.error-content h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--browser-text-primary);
+  margin: 0;
+}
+
+.error-content p {
+  font-size: 16px;
+  color: var(--browser-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.error-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.error-actions .btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.error-actions .btn--primary {
+  background-color: var(--browser-primary);
+  color: white;
+  border: none;
+}
+
+.error-actions .btn--primary:hover {
+  background-color: var(--browser-secondary);
+}
+
+.error-actions .btn--outline {
+  background-color: transparent;
+  border: 1px solid var(--browser-border);
+  color: var(--browser-text-primary);
+}
+
+.error-actions .btn--outline:hover {
+  background-color: var(--browser-hover);
+  border-color: var(--browser-accent);
+}
+
 .welcome-screen {
   text-align: center;
   padding: 40px;
