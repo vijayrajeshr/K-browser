@@ -1,106 +1,4 @@
-// Browser State Management
-class BrowserState {
-  constructor() {
-    this.tabs = [];
-    this.activeTabId = null;
-    this.maxTabs = 3; // MVP limit
-  }
-
-  addTab(url = '') {
-    if (this.tabs.length >= this.maxTabs) {
-      alert(`Maximum ${this.maxTabs} tabs allowed`);
-      return null;
-    }
-
-    const tabId = `tab-${Date.now()}`;
-    const tab = {
-      id: tabId,
-      title: 'New Tab',
-      id: tabId,
-      title: 'New Tab',
-      url: url || '', // Empty by default, not about:blank for UI
-      timestamp: Date.now(),
-      iframe: null,
-      history: [],
-      historyIndex: -1
-    };
-    this.tabs.push(tab);
-    return tab;
-  }
-
-  removeTab(tabId) {
-    const index = this.tabs.findIndex(t => t.id === tabId);
-    if (index !== -1) {
-      const tab = this.tabs[index];
-      // Remove iframe if it exists
-      if (tab.iframe && tab.iframe.parentNode) {
-        tab.iframe.parentNode.removeChild(tab.iframe);
-      }
-      this.tabs.splice(index, 1);
-      if (this.activeTabId === tabId) {
-        this.activeTabId = this.tabs.length > 0 ? this.tabs[0].id : null;
-      }
-    }
-  }
-
-  getActiveTab() {
-    return this.tabs.find(t => t.id === this.activeTabId);
-  }
-
-  updateTabUrl(tabId, url) {
-    const tab = this.tabs.find(t => t.id === tabId);
-    if (tab) {
-      tab.url = url;
-    }
-  }
-
-  updateTabTitle(tabId, title) {
-    const tab = this.tabs.find(t => t.id === tabId);
-    if (tab) {
-      tab.title = title || 'Untitled';
-    }
-  }
-
-  addToHistory(tabId, url) {
-    const tab = this.tabs.find(t => t.id === tabId);
-    if (tab) {
-      // Remove forward history when navigating to new page
-      tab.history = tab.history.slice(0, tab.historyIndex + 1);
-      tab.history.push(url);
-      tab.historyIndex = tab.history.length - 1;
-    }
-  }
-
-  canGoBack(tabId) {
-    const tab = this.tabs.find(t => t.id === tabId);
-    if (!tab) return false;
-    return tab.historyIndex > 0;
-  }
-
-  canGoForward(tabId) {
-    const tab = this.tabs.find(t => t.id === tabId);
-    if (!tab) return false;
-    return tab.historyIndex < tab.history.length - 1;
-  }
-
-  goBack(tabId) {
-    const tab = this.tabs.find(t => t.id === tabId);
-    if (tab && this.canGoBack(tabId)) {
-      tab.historyIndex--;
-      return tab.history[tab.historyIndex];
-    }
-    return null;
-  }
-
-  goForward(tabId) {
-    const tab = this.tabs.find(t => t.id === tabId);
-    if (tab && this.canGoForward(tabId)) {
-      tab.historyIndex++;
-      return tab.history[tab.historyIndex];
-    }
-    return null;
-  }
-}
+// Browser State Management - Imported from js/browser-state.js
 
 // Initialize browser state
 const browserState = new BrowserState();
@@ -188,93 +86,31 @@ const noteCloseBtn = document.getElementById('noteCloseBtn');
 const noteTextarea = document.getElementById('noteTextarea');
 const googleSearchBtn = document.getElementById('googleSearchBtn');
 
-// Utility Functions
-function isValidUrl(string) {
-  try {
-    if (string.startsWith('http://') || string.startsWith('https://')) {
-      new URL(string);
-      return true;
-    }
-    if (string.includes('.') && !string.includes(' ') && !/\s/.test(string)) {
-      new URL('https://' + string);
-      return true;
-    }
-    return false;
-  } catch (e) {
-    return false;
-  }
-}
-
-// Simplified: No proxy for now - focus on UI
-// Sites that work in iframes will work, others will show helpful message
-
-function sanitizeUrl(input) {
-  input = input.trim();
-
-  if (!input) {
-    return 'https://www.google.com';
-  }
-
-  if (input === 'demo:article') {
-    return 'demo:article';
-  }
-
-  if (input.startsWith('http://') || input.startsWith('https://')) {
-    return input;
-  }
-
-  if (isValidUrl(input)) {
-    return 'https://' + input;
-  }
-
-  return 'https://www.google.com/search?q=' + encodeURIComponent(input);
-}
-
-function showLoading() {
-  loadingIndicator.classList.add('active');
-  addressBar.classList.add('loading');
-}
-
-function hideLoading() {
-  loadingIndicator.classList.remove('active');
-  addressBar.classList.remove('loading');
-}
-
-function showWelcomeScreen() {
-  welcomeScreen.style.display = 'flex';
-  iframeContainer.style.display = 'none';
-  errorMessage.style.display = 'none';
-}
-
-function hideWelcomeScreen() {
-  welcomeScreen.style.display = 'none';
-  iframeContainer.style.display = 'block';
-}
-
-function showError(message, url = null) {
-  errorMessage.style.display = 'flex';
-  const errorText = errorMessage.querySelector('#errorText');
-  if (errorText) {
-    errorText.textContent = message || 'This website blocks embedding in iframes for security reasons.';
-  }
-  iframeContainer.style.display = 'none';
-  welcomeScreen.style.display = 'none';
-
-  // Store URL for opening in new window
-  if (url) {
-    errorMessage.dataset.url = url;
-  }
-}
-
-function hideError() {
-  errorMessage.style.display = 'none';
-}
+// Utility Functions - Imported from js/utils.js
 
 // Tab Management
 function createTabElement(tab) {
   const tabElement = document.createElement('div');
   tabElement.className = 'tab';
   tabElement.dataset.tabId = tab.id;
+
+  // Assign random color for Vivaldi-style tab accents
+  const colors = [
+    'var(--color-tab-red)',
+    'var(--color-tab-green)',
+    'var(--color-tab-blue)',
+    'var(--color-tab-yellow)',
+    'var(--color-tab-purple)',
+    'var(--color-tab-orange)'
+  ];
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  tabElement.style.setProperty('--tab-color', randomColor);
+
+  // Favicon (Simulated)
+  const favicon = document.createElement('img');
+  favicon.className = 'tab-icon';
+  // Default to globe icon, can be updated later based on URL
+  favicon.src = 'https://www.google.com/s2/favicons?domain=google.com';
 
   const titleSpan = document.createElement('span');
   titleSpan.className = 'tab-title';
@@ -288,6 +124,7 @@ function createTabElement(tab) {
     closeTab(tab.id);
   };
 
+  tabElement.appendChild(favicon); // Add favicon
   tabElement.appendChild(titleSpan);
   tabElement.appendChild(closeBtn);
 
@@ -988,9 +825,18 @@ function initBrowser() {
     });
   }
 
-  // Google search button
-  if (googleSearchBtn) {
-    googleSearchBtn.addEventListener('click', handleGoogleSearch);
+  // Google search bar on welcome screen
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const query = searchInput.value.trim();
+        if (query) {
+          navigateToUrl(query);
+          searchInput.value = '';
+        }
+      }
+    });
   }
 
   // Home links
@@ -1024,3 +870,87 @@ function initBrowser() {
 
 // Start the browser when page loads
 window.addEventListener('DOMContentLoaded', initBrowser);
+
+// ============= Animated Starfield Background =============
+class Starfield {
+  constructor() {
+    this.canvas = document.getElementById('starfield');
+    if (!this.canvas) return;
+
+    this.ctx = this.canvas.getContext('2d');
+    this.stars = [];
+    this.numStars = 150;
+
+    this.resize();
+    this.createStars();
+    this.animate();
+
+    window.addEventListener('resize', () => this.resize());
+  }
+
+  resize() {
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+  }
+
+  createStars() {
+    this.stars = [];
+    for (let i = 0; i < this.numStars; i++) {
+      this.stars.push({
+        x: Math.random() * this.canvas.width,
+        y: Math.random() * this.canvas.height,
+        radius: Math.random() * 1.5 + 0.5,
+        alpha: Math.random(),
+        alphaSpeed: (Math.random() * 0.02 + 0.005) * (Math.random() < 0.5 ? 1 : -1),
+        color: this.getStarColor()
+      });
+    }
+  }
+
+  getStarColor() {
+    const colors = [
+      'rgba(99, 102, 241, ALPHA)',   // Primary indigo
+      'rgba(236, 72, 153, ALPHA)',   // Secondary pink
+      'rgba(139, 92, 246, ALPHA)',   // Accent violet
+      'rgba(6, 182, 212, ALPHA)',    // Cyan
+      'rgba(255, 255, 255, ALPHA)'   // White
+    ];
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  animate() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    for (let star of this.stars) {
+      // Update alpha for twinkling
+      star.alpha += star.alphaSpeed;
+      if (star.alpha <= 0.1 || star.alpha >= 1) {
+        star.alphaSpeed *= -1;
+      }
+      star.alpha = Math.max(0.1, Math.min(1, star.alpha));
+
+      // Draw star with glow
+      const color = star.color.replace('ALPHA', star.alpha.toFixed(2));
+      const glowColor = star.color.replace('ALPHA', (star.alpha * 0.3).toFixed(2));
+
+      // Glow effect
+      this.ctx.beginPath();
+      this.ctx.arc(star.x, star.y, star.radius * 3, 0, Math.PI * 2);
+      this.ctx.fillStyle = glowColor;
+      this.ctx.fill();
+
+      // Star core
+      this.ctx.beginPath();
+      this.ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      this.ctx.fillStyle = color;
+      this.ctx.fill();
+    }
+
+    requestAnimationFrame(() => this.animate());
+  }
+}
+
+// Initialize starfield when page loads
+window.addEventListener('DOMContentLoaded', () => {
+  new Starfield();
+});
