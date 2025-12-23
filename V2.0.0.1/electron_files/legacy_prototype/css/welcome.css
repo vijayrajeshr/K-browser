@@ -1,0 +1,145 @@
+/*
+ * K-Browser - Welcome Screen (Dark Theme)
+ * Home page layout, search bar, and quick links
+ */
+
+/* ============================================
+ * WELCOME SCREEN CONTAINER
+ * ============================================ */
+.welcome-screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-darkest);
+}
+
+.welcome-content {
+    text-align: center;
+    animation: fadeIn 0.4s ease;
+    max-width: 600px;
+    padding: 0 var(--space-xl);
+}
+
+.welcome-content h1 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: var(--space-xl);
+    color: var(--color-text-primary);
+    letter-spacing: -0.5px;
+}
+
+/* ============================================
+ * SEARCH BAR - Dark Theme
+ * ============================================ */
+.google-search-container {
+    margin-bottom: var(--space-xl);
+}
+
+.google-search-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 540px;
+    height: 44px;
+    background: var(--color-bg-medium);
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0 var(--space-md);
+    margin: 0 auto;
+    transition: all var(--transition-normal);
+}
+
+.google-search-bar:hover,
+.google-search-bar:focus-within {
+    background: var(--color-bg-light);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.google-search-bar svg {
+    width: 18px;
+    height: 18px;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+}
+
+.google-search-bar input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    height: 100%;
+    padding: 0 var(--space-md);
+    font-size: var(--font-size-lg);
+    color: var(--color-text-primary);
+    outline: none;
+    font-family: inherit;
+}
+
+.google-search-bar input::placeholder {
+    color: var(--color-text-muted);
+}
+
+/* ============================================
+ * QUICK LINKS - Dark Theme Icons
+ * ============================================ */
+.home-links {
+    display: flex;
+    gap: var(--space-xl);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--space-xl);
+}
+
+.home-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-normal);
+    text-decoration: none;
+    color: var(--color-text-primary);
+    cursor: pointer;
+}
+
+.home-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.home-link svg {
+    width: 40px;
+    height: 40px;
+    color: var(--color-text-secondary);
+    transition: all var(--transition-normal);
+}
+
+.home-link:hover svg {
+    color: var(--color-primary);
+    transform: scale(1.05);
+}
+
+.home-link span {
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+ * ANIMATIONS
+ * ============================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

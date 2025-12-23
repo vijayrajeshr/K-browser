@@ -1,0 +1,300 @@
+/*
+ * K-Browser - UI Components (Dark Vivaldi Theme)
+ * Buttons, inputs, modals, and reusable UI elements
+ */
+
+/* ============================================
+ * BUTTONS
+ * ============================================ */
+.btn {
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: var(--font-size-md);
+    transition: all var(--transition-normal);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+}
+
+.btn--primary {
+    background: var(--color-primary);
+    color: white;
+}
+
+.btn--primary:hover {
+    background: #3367d6;
+    /* Darker blue */
+}
+
+.btn--outline {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--color-text-primary);
+}
+
+.btn--outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================
+ * USER DROPDOWN
+ * ============================================ */
+.user-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-full);
+    background: #607d8b;
+    border: none;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.user-icon-container {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.user-tooltip {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 260px;
+    padding: var(--space-sm);
+    background: var(--color-bg-medium);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(5px);
+    transition: all var(--transition-normal);
+    z-index: 200;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: transparent;
+}
+
+.user-icon-container:hover .user-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-info {
+    padding: var(--space-sm) var(--space-md);
+}
+
+.user-name {
+    font-weight: 600;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-md);
+}
+
+.user-email {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-top: 2px;
+}
+
+.user-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: var(--space-xs) 0;
+}
+
+.user-menu-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    text-decoration: none;
+    font-size: var(--font-size-md);
+    color: var(--color-text-primary);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+}
+
+.user-menu-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.user-menu-link svg {
+    color: var(--color-text-muted);
+}
+
+.user-menu-link:hover svg {
+    color: var(--color-text-primary);
+}
+
+/* ============================================
+ * NOTE MODAL (Dark Theme)
+ * ============================================ */
+.note-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+}
+
+.note-modal-content {
+    width: 400px;
+    height: 300px;
+    background: var(--color-bg-medium);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: modalSlideIn 0.2s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.note-modal-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-bg-light);
+}
+
+.note-modal-header h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.note-textarea {
+    flex: 1;
+    padding: 16px;
+    border: none;
+    resize: none;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    outline: none;
+    background: var(--color-bg-medium);
+    color: var(--color-text-primary);
+}
+
+.note-textarea::placeholder {
+    color: var(--color-text-muted);
+}
+
+.note-close-btn {
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.note-close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* ============================================
+ * ERROR STATE
+ * ============================================ */
+.error-message {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-darkest);
+}
+
+.error-content {
+    text-align: center;
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-medium);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    max-width: 400px;
+}
+
+.error-content svg {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+}
+
+.error-content h2 {
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.error-content p {
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+ * LOADING INDICATOR
+ * ============================================ */
+.loading-indicator {
+    position: absolute;
+    top: calc(var(--tab-bar-height) + var(--nav-bar-height) + var(--bookmarks-bar-height));
+    /* Below all bars */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: transparent;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    z-index: 150;
+}
+
+.loading-indicator.active {
+    opacity: 1;
+}
+
+.spinner {
+    width: 30%;
+    height: 100%;
+    background: var(--color-primary);
+    animation: loading 1s infinite linear;
+    border-radius: 0;
+}
