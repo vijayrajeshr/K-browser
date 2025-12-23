@@ -35,6 +35,8 @@ const DEMO_ARTICLE_HTML = `
         </header>
 
         <img src="https://images.unsplash.com/photo-1481487484168-9b995ecc1679?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Futuristic interface concept">
+        
+        <h2>V2 BRANCH CHECK...............................................................................</h2>
 
         <p>In the ever-evolving landscape of digital interaction, the web browser remains our primary window to the internet. However, the fundamental design of browsers has remained surprisingly static for nearly two decades. We still rely on tabs, address bars, and back buttons—paradigms established in the late 90s.</p>
 
