@@ -1,0 +1,74 @@
+/*
+ * K-Browser Design System - Vivaldi-Style Dark Theme
+ * Central place for all design tokens
+ */
+
+:root {
+    /* ============================================
+   * COLOR PALETTE - Dark Theme
+   * ============================================ */
+
+    /* Base Colors */
+    --color-bg-darkest: #1a1a1a;
+    --color-bg-dark: #262626;
+    --color-bg-medium: #333333;
+    --color-bg-light: #404040;
+
+    /* Text Colors */
+    --color-text-primary: #ffffff;
+    --color-text-secondary: rgba(255, 255, 255, 0.7);
+    --color-text-muted: rgba(255, 255, 255, 0.5);
+
+    /* Accent Colors for Tabs */
+    --color-tab-red: #e53935;
+    --color-tab-green: #43a047;
+    --color-tab-blue: #1e88e5;
+    --color-tab-yellow: #fdd835;
+    --color-tab-purple: #8e24aa;
+    --color-tab-orange: #fb8c00;
+
+    /* UI Colors */
+    --color-primary: #4285f4;
+    --color-success: #34a853;
+    --color-warning: #fbbc04;
+    --color-error: #ea4335;
+
+    /* ============================================
+   * SPACING
+   * ============================================ */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --space-xl: 24px;
+
+    /* ============================================
+   * BORDER RADIUS
+   * ============================================ */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-full: 9999px;
+
+    /* ============================================
+   * TYPOGRAPHY
+   * ============================================ */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-size-xs: 11px;
+    --font-size-sm: 12px;
+    --font-size-md: 13px;
+    --font-size-lg: 14px;
+
+    /* ============================================
+   * LAYOUT DIMENSIONS
+   * ============================================ */
+    --tab-bar-height: 36px;
+    --nav-bar-height: 40px;
+    --bookmarks-bar-height: 32px;
+
+    /* ============================================
+   * TRANSITIONS
+   * ============================================ */
+    --transition-fast: 0.1s ease;
+    --transition-normal: 0.2s ease;
+}

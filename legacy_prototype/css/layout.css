@@ -1,0 +1,357 @@
+/*
+ * K-Browser - Vivaldi-Style Layout
+ * Tabs on top, nav bar below, bookmarks bar
+ */
+
+/* ============================================
+ * BASE RESET
+ * ============================================ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: var(--font-family);
+    background: var(--color-bg-darkest);
+    color: var(--color-text-primary);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ============================================
+ * BROWSER CONTAINER
+ * ============================================ */
+.browser-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--color-bg-darkest);
+}
+
+/* ============================================
+ * TAB BAR - Top of window (Vivaldi style)
+ * ============================================ */
+.tab-bar {
+    display: flex;
+    align-items: center;
+    height: var(--tab-bar-height);
+    background: var(--color-bg-dark);
+    padding: 0 var(--space-sm);
+    gap: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.tab-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    height: 28px;
+    min-width: 120px;
+    max-width: 200px;
+    padding: 0 var(--space-sm) 0 var(--space-md);
+    gap: var(--space-sm);
+    background: var(--color-bg-medium);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    position: relative;
+}
+
+.tab:hover {
+    background: var(--color-bg-light);
+    color: var(--color-text-primary);
+}
+
+.tab.active {
+    background: var(--color-bg-darkest);
+    color: var(--color-text-primary);
+}
+
+/* Colored tab indicator on left */
+.tab::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    bottom: 4px;
+    width: 3px;
+    border-radius: 0 2px 2px 0;
+    background: var(--tab-color, var(--color-tab-blue));
+}
+
+.tab-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.tab-title {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tab-close {
+    width: 18px;
+    height: 18px;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: transparent;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all var(--transition-fast);
+    font-size: 14px;
+}
+
+.tab:hover .tab-close {
+    opacity: 1;
+}
+
+.tab-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-primary);
+}
+
+.tab-add {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: transparent;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.tab-add:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-primary);
+}
+
+/* ============================================
+ * NAVIGATION BAR - Below tabs
+ * ============================================ */
+.browser-header {
+    display: flex;
+    align-items: center;
+    height: var(--nav-bar-height);
+    background: var(--color-bg-dark);
+    padding: 0 var(--space-md);
+    gap: var(--space-sm);
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.nav-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-md);
+    border: none;
+    background: transparent;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-primary);
+}
+
+.nav-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.nav-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Bookmark Button */
+.bookmark-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-md);
+    border: none;
+    background: transparent;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin-right: var(--space-sm);
+}
+
+.bookmark-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-primary);
+}
+
+/* Address Bar */
+.address-bar-container {
+    flex: 1;
+    height: 30px;
+    background: var(--color-bg-medium);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--space-md);
+    gap: var(--space-sm);
+    transition: all var(--transition-normal);
+}
+
+.address-bar-container:focus-within {
+    background: var(--color-bg-light);
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.3);
+}
+
+.address-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--color-text-muted);
+}
+
+.address-bar {
+    flex: 1;
+    border: none;
+    background: transparent;
+    height: 100%;
+    font-size: var(--font-size-md);
+    color: var(--color-text-primary);
+    outline: none;
+    font-family: inherit;
+}
+
+.address-bar::placeholder {
+    color: var(--color-text-muted);
+}
+
+/* Header Actions */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.btn-reading-mode,
+.user-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-md);
+    border: none;
+    background: transparent;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-reading-mode:hover,
+.user-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-primary);
+}
+
+/* ============================================
+ * BOOKMARKS BAR
+ * ============================================ */
+.bookmarks-bar {
+    display: flex;
+    align-items: center;
+    height: var(--bookmarks-bar-height);
+    background: var(--color-bg-dark);
+    padding: 0 var(--space-md);
+    gap: var(--space-xs);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.bookmarks-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.bookmark-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.bookmark-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-primary);
+}
+
+.bookmark-item svg,
+.bookmark-item img {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* ============================================
+ * VIEWPORT - Content Area
+ * ============================================ */
+.viewport {
+    flex: 1;
+    position: relative;
+    background: var(--color-bg-darkest);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.iframe-container {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: #ffffff;
+}

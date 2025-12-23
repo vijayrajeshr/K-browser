@@ -1,0 +1,17 @@
+/*
+ * K-Browser - Main Stylesheet (Import Hub)
+ * This file imports all modular CSS files
+ * 
+ * Structure:
+ * - variables.css  : Design tokens and CSS custom properties
+ * - layout.css     : Header, tabs, viewport structure
+ * - components.css : Buttons, inputs, tabs, cards
+ * - welcome.css    : Home screen and search bar
+ * - reading-mode.css : Reader view and modals
+ */
+
+@import url('./variables.css');
+@import url('./layout.css');
+@import url('./components.css');
+@import url('./welcome.css');
+@import url('./reading-mode.css');
